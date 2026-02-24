@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;300;400&display=swap');
+
+:root {
+  --sage: #9CAF9C;
+  --gold: #C5A253;
+  --dark: #2E2E2E;
+  --cream: #E8DFD8;
+  --white: #FFFFFF;
+  --gold-light: rgba(197, 162, 83, 0.15);
+  --dark-overlay: rgba(46, 46, 46, 0.55);
+  --footer-bg: #1e1e1e;
+  --footer-surface: #252525;
+  --gold-muted: rgba(197, 162, 83, 0.15);
+  --dark-bg: #1e1e1e;
+  --dark-surface: #252525;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}

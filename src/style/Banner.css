@@ -1,0 +1,288 @@
+/* === BANNER CSS === */
+/* Palette: #9CAF9C (sage), #C5A253 (gold), #2E2E2E (dark), #E8DFD8 (cream), #FFFFFF */
+
+/* ─── Banner ─────────────────────────────────────────────── */
+.banner {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 620px;
+  overflow: hidden;
+  font-family: 'Josefin Sans', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Slides ─────────────────────────────────────────────── */
+.banner__slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 0.9s ease, transform 6s ease;
+  will-change: opacity, transform;
+}
+
+.banner__slide--active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.banner__slide--out {
+  opacity: 0;
+  transform: scale(1.04);
+}
+
+/* ─── Overlay ────────────────────────────────────────────── */
+.banner__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(46, 46, 46, 0.70) 0%,
+    rgba(46, 46, 46, 0.40) 50%,
+    rgba(156, 175, 156, 0.25) 100%
+  );
+  z-index: 1;
+}
+
+/* ─── Deco lines ─────────────────────────────────────────── */
+.banner__deco-line {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  z-index: 2;
+  animation: lineGrow 1.8s ease forwards;
+}
+
+.banner__deco-line--top {
+  top: 0;
+  height: 80px;
+  animation-delay: 0.3s;
+}
+
+.banner__deco-line--bottom {
+  bottom: 0;
+  height: 80px;
+  animation-delay: 0.5s;
+}
+
+@keyframes lineGrow {
+  from { opacity: 0; transform: translateX(-50%) scaleY(0); }
+  to   { opacity: 1; transform: translateX(-50%) scaleY(1); }
+}
+
+/* ─── Content ────────────────────────────────────────────── */
+.banner__content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  color: var(--white);
+  padding: 0 2rem;
+  max-width: 760px;
+  animation: contentFade 1.2s ease 0.4s both;
+}
+
+@keyframes contentFade {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Eyebrow */
+.banner__eyebrow {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.45em;
+  font-size: clamp(0.65rem, 1.5vw, 0.85rem);
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.4rem;
+  animation: contentFade 1.2s ease 0.2s both;
+}
+
+/* Title */
+.banner__title {
+  font-family: 'Cormorant Garamond', serif;
+  line-height: 1.05;
+  margin: 0 0 1.5rem;
+}
+
+.banner__title--thin {
+  display: block;
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(2.6rem, 7vw, 5.5rem);
+  color: var(--cream);
+  letter-spacing: 0.04em;
+}
+
+.banner__title--bold {
+  display: block;
+  font-weight: 600;
+  font-size: clamp(3.8rem, 10vw, 8rem);
+  color: var(--white);
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 40px rgba(197, 162, 83, 0.3);
+}
+
+/* Divider */
+.banner__divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0 0 1.6rem;
+}
+
+.banner__divider-line {
+  display: block;
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold));
+}
+
+.banner__divider-line:last-child {
+  background: linear-gradient(to left, transparent, var(--gold));
+}
+
+.banner__divider-diamond {
+  color: var(--gold);
+  font-size: 0.55rem;
+  letter-spacing: 0;
+}
+
+/* Subtitle */
+.banner__subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.05rem, 2.5vw, 1.4rem);
+  color: var(--cream);
+  letter-spacing: 0.06em;
+  margin-bottom: 2.8rem;
+  opacity: 0.9;
+}
+
+/* ─── Botones PrimeReact ─────────────────────────────────── */
+.banner__cta {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.banner__btn-prime.p-button {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.75rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  padding: 0.95rem 2.4rem;
+  border-radius: 0;
+  transition: all 0.35s ease;
+  box-shadow: none !important;
+}
+
+/* Primario dorado */
+.banner__btn-prime--primary.p-button {
+  background: var(--gold);
+  border: 1px solid var(--gold);
+  color: var(--dark);
+}
+.banner__btn-prime--primary.p-button:hover,
+.banner__btn-prime--primary.p-button:focus {
+  background: transparent !important;
+  border-color: var(--gold) !important;
+  color: var(--gold) !important;
+}
+
+/* WhatsApp outline */
+.banner__btn-prime--whatsapp.p-button {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.5);
+  color: var(--white);
+  gap: 0.6rem;
+}
+.banner__btn-prime--whatsapp.p-button:hover,
+.banner__btn-prime--whatsapp.p-button:focus {
+  background: #25D366 !important;
+  border-color: #25D366 !important;
+  color: var(--white) !important;
+}
+.banner__btn-prime--whatsapp.p-button .p-button-icon {
+  font-size: 1rem;
+}
+
+/* ─── Dots ───────────────────────────────────────────────── */
+.banner__dots {
+  position: absolute;
+  bottom: 2.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.banner__dot {
+  width: 28px;
+  height: 2px;
+  background: rgba(255,255,255,0.35);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.banner__dot--active {
+  background: var(--gold);
+  width: 44px;
+}
+
+/* ─── Scroll hint ────────────────────────────────────────── */
+.banner__scroll {
+  position: absolute;
+  right: 2.5rem;
+  bottom: 2.2rem;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  animation: contentFade 1.2s ease 1.2s both;
+}
+
+.banner__scroll-text {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 100;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  writing-mode: vertical-rl;
+}
+
+.banner__scroll-line {
+  display: block;
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+  animation: scrollPulse 2s ease infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { transform: scaleY(1); opacity: 0.5; }
+  50%       { transform: scaleY(0.6); opacity: 1; }
+}
+
+/* ─── Responsive ─────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .banner__scroll { display: none; }
+  .banner__deco-line { display: none; }
+  .banner__cta { flex-direction: column; align-items: center; }
+}
