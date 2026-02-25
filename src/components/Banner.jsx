@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import "../style/Banner.css";
 import { Button } from "primereact/button";
 import Banner1 from "../assets/Banner1.png";
+import Banner4 from "../assets/Banner4.png";
 import Banner2 from "../assets/Banner2.png";
 import Banner3 from "../assets/Banner3.png";
 
@@ -12,7 +13,7 @@ const WHATSAPP_MESSAGE = encodeURIComponent(
 );
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`;
 
-const images = [Banner1, Banner2, Banner3];
+const images = [Banner1, Banner4, Banner2, Banner3];
 
 // Contenido por ruta
 const contentByRoute = {
