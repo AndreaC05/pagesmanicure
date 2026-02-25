@@ -1,12 +1,5 @@
 /* === HOME.CSS — Landing Page completa === */
 
-body {
-  font-family: 'Josefin Sans', sans-serif;
-  color: var(--dark);
-  background: var(--white);
-  overflow-x: hidden;
-}
-
 /* ─── Scroll reveal ──────────────────────────────────────── */
 .reveal {
   opacity: 0;
@@ -171,6 +164,59 @@ body {
 }
 
 /* ══════════════════════════════════════════════════════════
+   SERVICES TABS (NUEVO)
+══════════════════════════════════════════════════════════ */
+.services__tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 500px;
+  margin: 0 auto 4rem;
+}
+
+.services__tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  padding: 1rem 1.8rem;
+  border: 1px solid rgba(197,162,83,0.25);
+  background: var(--white);
+  color: rgba(46,46,46,0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.services__tab:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+  background: var(--gold-light);
+}
+
+.services__tab--active {
+  color: var(--dark);
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+.services__tab-icon {
+  font-size: 1rem;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.services__tab--active .services__tab-icon {
+  transform: scale(1.1);
+}
+
+/* ══════════════════════════════════════════════════════════
    SERVICES
 ══════════════════════════════════════════════════════════ */
 .services__grid {
@@ -327,17 +373,6 @@ body {
   margin-top: 1rem;
 }
 
-/* Nota galería */
-.gallery__note {
-  text-align: center;
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 0.70rem;
-  letter-spacing: 0.2em;
-  color: rgba(232,223,216,0.3);
-  margin-top: -2rem;
-  margin-bottom: 2rem;
-}
-
 /* ══════════════════════════════════════════════════════════
    ABOUT
 ══════════════════════════════════════════════════════════ */
@@ -361,7 +396,7 @@ body {
 .about__frame {
   width: 320px;
   height: 380px;
-  background: linear-gradient(145deg, var(--sage) 0%, #7d9a7d 100%);
+  background: linear-gradient(145deg, var(--sage) 0%, rgba(156, 175, 156, 0.85) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -376,10 +411,36 @@ body {
   text-align: center;
   padding: 2rem;
 }
+
+.about__frame-icons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .about__frame-icon {
   font-size: 2rem;
   color: rgba(255,255,255,0.4);
 }
+
+.about__frame-icon--nails {
+  animation: float 3s ease-in-out infinite;
+}
+
+.about__frame-icon--hair {
+  animation: float 3s ease-in-out infinite 1.5s;
+}
+
+.about__frame-icon--divider {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.3);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
 .about__frame-text {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
@@ -540,6 +601,14 @@ body {
   .stats-bar { grid-template-columns: repeat(2, 1fr); }
   .stats-bar__item:nth-child(2) { border-right: none; }
   .services__grid { grid-template-columns: 1fr; }
+  .services__tabs {
+    flex-direction: column;
+    max-width: 100%;
+    gap: 0.8rem;
+  }
+  .services__tab {
+    padding: 0.9rem 1.5rem;
+  }
   .gallery__grid {
     grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: 200px;
@@ -551,4 +620,5 @@ body {
   .gallery__grid { grid-template-columns: 1fr; }
   .about__frame { width: 220px; height: 260px; }
   .section__header { margin-bottom: 3rem; }
+  .services__tabs { gap: 0.6rem; }
 }

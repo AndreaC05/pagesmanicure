@@ -86,11 +86,18 @@
   padding: 0 2rem;
   max-width: 760px;
   animation: contentFade 1.2s ease 0.4s both;
+  transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
 @keyframes contentFade {
   from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+.banner__content--fade {
+  opacity: 0;
+  transform: translateY(14px);
+  pointer-events: none;
 }
 
 /* Eyebrow */

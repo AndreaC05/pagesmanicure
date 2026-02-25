@@ -1,16 +1,18 @@
+import { useState } from "react";
 import "../style/Footer.css";
 import Logo from "../assets/Logo.png";
+import { Link, useNavigate } from "react-router-dom";
 
 const WHATSAPP_NUMBER = "51950874416";
 const WHATSAPP_MESSAGE = encodeURIComponent("¡Hola! Quiero reservar una cita 💅");
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`;
 
 const navLinks = [
-  { label: "Inicio", href: "#inicio" },
-  { label: "Servicios", href: "#servicios" },
-  { label: "Galería", href: "#galeria" },
-  { label: "Nosotros", href: "#nosotros" },
-  { label: "Contacto", href: "#contacto" },
+  { label: "Inicio", href: "/" },
+  { label: "Servicios", href: "/servicios" },
+  { label: "Galería", href: "/galeria" },
+  { label: "Nosotros", href: "/nosotros" },
+  { label: "Contacto", href: "/contacto" },
 ];
 
 const socialLinks = [
@@ -38,6 +40,7 @@ const socialLinks = [
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const navigate = useNavigate();
 
   return (
     <footer className="footer">
@@ -51,9 +54,9 @@ export default function Footer() {
       <div className="footer__inner">
         {/* Column 1 — Brand */}
         <div className="footer__brand">
-          <img src={Logo} alt="Studio de Uñas & Belleza" className="footer__logo" />
+          <img src={Logo} alt="Beauty Studio - Uñas & Cabello" className="footer__logo" />
           <p className="footer__tagline">
-            Arte en cada detalle.<br />Belleza en cada uña.
+            Belleza integral en cada detalle.<br />Uñas perfectas. Cabello radiante.
           </p>
           <div className="footer__socials">
             {socialLinks.map((s) => (
@@ -79,10 +82,10 @@ export default function Footer() {
           <h4 className="footer__col-title">Navegación</h4>
           <nav className="footer__nav">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="footer__nav-link">
+              <Link key={link.href} to={link.href} className="footer__nav-link">
                 <span className="footer__nav-arrow">→</span>
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
         </div>
@@ -121,7 +124,7 @@ export default function Footer() {
       <div className="footer__bottom">
         <span className="footer__bottom-line" />
         <p className="footer__copy">
-          © {year} Studio de Uñas &amp; Belleza — Todos los derechos reservados
+          © {year} Beauty Studio — Uñas &amp; Cabello — Todos los derechos reservados
         </p>
         <span className="footer__bottom-line" />
       </div>

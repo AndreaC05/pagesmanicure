@@ -1,25 +1,87 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import "../style/Banner.css";
 import { Button } from "primereact/button";
 import Banner1 from "../assets/Banner1.png";
 import Banner2 from "../assets/Banner2.png";
 import Banner3 from "../assets/Banner3.png";
 
-const slides = [Banner1, Banner2, Banner3];
-
-const WHATSAPP_NUMBER = "51950874416"; // Perú +51
-const WHATSAPP_MESSAGE = encodeURIComponent("¡Hola! Quiero reservar una cita 💅");
+const WHATSAPP_NUMBER = "51950874416";
+const WHATSAPP_MESSAGE = encodeURIComponent(
+  "¡Hola! Quiero reservar una cita 💅",
+);
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`;
+
+const images = [Banner1, Banner2, Banner3];
+
+// Contenido por ruta
+const contentByRoute = {
+  "/": {
+    eyebrow: "Studio de Belleza Integral",
+    thinTitle: "Donde el estilo",
+    boldTitle: "Cobra Vida",
+    subtitle:
+      "Especialistas en uñas, cabello y tratamientos de belleza para ti.",
+    btnLabel: "Ver Servicios",
+    scrollTo: "servicios",
+  },
+  "/servicios": {
+    eyebrow: "Nuestros Servicios",
+    thinTitle: "Lo que",
+    boldTitle: "Ofrecemos",
+    subtitle:
+      "Uñas, cabello y mucho más. Descubre todo lo que tenemos para ti.",
+    btnLabel: "Ver Todo",
+    scrollTo: "servicios",
+  },
+  "/galeria": {
+    eyebrow: "Galería de Trabajos",
+    thinTitle: "Nuestra",
+    boldTitle: "Inspiración",
+    subtitle: "Cada trabajo refleja pasión, detalle y dedicación.",
+    btnLabel: "Ver Galería",
+    scrollTo: "galeria",
+  },
+  "/nosotros": {
+    eyebrow: "Conoce el Equipo",
+    thinTitle: "Quiénes",
+    boldTitle: "Somos",
+    subtitle: "Un equipo apasionado por la belleza y el cuidado personal.",
+    btnLabel: "Conócenos",
+    scrollTo: "nosotros",
+  },
+  "/contacto": {
+    eyebrow: "Estamos para Ti",
+    thinTitle: "Escríbenos",
+    boldTitle: "Hoy",
+    subtitle:
+      "Reserva tu cita o consulta lo que necesites. Con gusto te atendemos.",
+    btnLabel: "Ver Contacto",
+    scrollTo: "contacto",
+  },
+};
 
 export default function Banner() {
   const [current, setCurrent] = useState(0);
   const [animating, setAnimating] = useState(false);
+  const [textVisible, setTextVisible] = useState(true);
 
+  const location = useLocation();
+  const content = contentByRoute[location.pathname] ?? contentByRoute["/"];
+
+  // Animar texto al cambiar de ruta
+  useEffect(() => {
+    setTextVisible(false);
+    const timer = setTimeout(() => setTextVisible(true), 400);
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
+
+  // Auto-slide de imágenes
   useEffect(() => {
     const interval = setInterval(() => {
       setAnimating(true);
       setTimeout(() => {
-        setCurrent((prev) => (prev + 1) % slides.length);
+        setCurrent((prev) => (prev + 1) % images.length);
         setAnimating(false);
       }, 800);
     }, 5000);
@@ -37,30 +99,31 @@ export default function Banner() {
 
   return (
     <section className="banner">
-      {/* Background slides */}
-      {slides.map((slide, i) => (
+      {/* Slides de imágenes — siempre rotan */}
+      {images.map((img, i) => (
         <div
           key={i}
-          className={`banner__slide ${i === current ? "banner__slide--active" : ""} ${animating && i === current ? "banner__slide--out" : ""}`}
-          style={{ backgroundImage: `url(${slide})` }}
+          className={`banner__slide ${i === current ? "banner__slide--active" : ""} ${
+            animating && i === current ? "banner__slide--out" : ""
+          }`}
+          style={{ backgroundImage: `url(${img})` }}
         />
       ))}
 
-      {/* Overlay */}
       <div className="banner__overlay" />
-
-      {/* Decorative line top */}
       <div className="banner__deco-line banner__deco-line--top" />
       <div className="banner__deco-line banner__deco-line--bottom" />
 
-      {/* Content */}
-      <div className="banner__content">
-        <p className="banner__eyebrow">Studio de Uñas &amp; Belleza</p>
+      {/* Contenido — cambia por ruta */}
+      <div
+        className={`banner__content ${!textVisible ? "banner__content--fade" : ""}`}
+      >
+        <p className="banner__eyebrow">{content.eyebrow}</p>
 
         <h1 className="banner__title">
-          <span className="banner__title--thin">Arte en</span>
+          <span className="banner__title--thin">{content.thinTitle}</span>
           <br />
-          <span className="banner__title--bold">Tus Manos</span>
+          <span className="banner__title--bold">{content.boldTitle}</span>
         </h1>
 
         <div className="banner__divider">
@@ -69,15 +132,17 @@ export default function Banner() {
           <span className="banner__divider-line" />
         </div>
 
-        <p className="banner__subtitle">
-          Cada detalle cuenta. Cada uña, una obra de arte.
-        </p>
+        <p className="banner__subtitle">{content.subtitle}</p>
 
         <div className="banner__cta">
           <Button
-            label="Ver Servicios"
+            label={content.btnLabel}
             className="banner__btn-prime banner__btn-prime--primary"
-            onClick={() => document.getElementById("servicios")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={() =>
+              document
+                .getElementById(content.scrollTo)
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
           />
           <Button
             label="Reservar Cita"
@@ -90,7 +155,7 @@ export default function Banner() {
 
       {/* Dots */}
       <div className="banner__dots">
-        {slides.map((_, i) => (
+        {images.map((_, i) => (
           <button
             key={i}
             className={`banner__dot ${i === current ? "banner__dot--active" : ""}`}
