@@ -353,7 +353,7 @@ export default function Servicios() {
         </div>
 
         <div className="services-why__grid">
-          {whyChooseUs.map((item, index) => (
+          {whyChooseUs.map((item, index) => ( 
             <div key={index} className="why-card">
               <span className="why-card__icon">{item.icon}</span>
               <h3 className="why-card__title">{item.title}</h3>
